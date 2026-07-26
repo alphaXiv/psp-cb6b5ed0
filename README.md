@@ -13,7 +13,7 @@ Read the [tutorial-style illustrated report](reports/psp-sd15/report.md), explor
 
 Scope and substitutions: 48 of 553 GenEval prompts, evenly split across six prompt types; five non-overlapping seed windows; public SD1.5; deterministic 64-step DDIM; fixed ImageReward; Transformers Mask2Former with GenEval’s decision rules instead of the mmcv 1.x detector environment; CLIP ViT-B/32 instead of unavailable HPSv2. SDXL and gated SD3.5 were not tested.
 
-All fresh evidence ran on **OpenResearch Kubernetes** with **NVIDIA RTX PRO 6000 Blackwell** GPUs. Each formal run used four GPUs; peak concurrency was **16 GPUs**. Formal measured experiment time was 119.0–121.8 seconds per run (602.7 seconds summed), peak allocated memory was 28.03 GiB per GPU, and the fresh setup-to-last-evidence window was **0.41 wall hours**.
+All fresh evidence ran on **OpenResearch Kubernetes** with **NVIDIA RTX PRO 6000 Blackwell** GPUs. Each formal run used four GPUs; peak concurrency was **16 GPUs**. Formal measured experiment time was 119.0–121.8 seconds per run (602.7 seconds summed), peak allocated memory was 28.03 GiB per GPU, and the fresh run window was **0.391 wall hours**.
 
 ## Experiment log
 

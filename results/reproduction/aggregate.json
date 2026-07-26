@@ -95,6 +95,6 @@
     "formal_job_elapsed_seconds_range": [118.9726202, 121.8218155],
     "formal_job_elapsed_seconds_sum": 602.6796539,
     "peak_memory_allocated_gib": 28.0330615,
-    "attempt_wall_hours_to_last_evidence": 0.41
+    "attempt_wall_hours_to_last_evidence": 0.390545
   }
 }

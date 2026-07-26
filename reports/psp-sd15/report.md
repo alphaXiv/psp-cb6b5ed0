@@ -64,7 +64,7 @@ Despite identical generator budgets, default PSP beat the timing ablation by +0.
 
 ## Compute, reproducibility, and limits
 
-All fresh evidence ran on **OpenResearch Kubernetes** using **NVIDIA RTX PRO 6000 Blackwell** GPUs. Each formal run allocated four GPUs; four jobs overlapped for a **peak of 16 GPUs**. Five formal jobs took 119.0–121.8 seconds of measured experiment time each (602.7 seconds summed), with 28.03 GiB maximum allocated memory per GPU. The complete fresh setup-to-last-evidence window was **0.41 wall hours** (20:48:19–21:13:08 UTC on 2026-07-26). The exact fixed command was `bash reproduction/run.sh`.
+All fresh evidence ran on **OpenResearch Kubernetes** using **NVIDIA RTX PRO 6000 Blackwell** GPUs. Each formal run allocated four GPUs; four jobs overlapped for a **peak of 16 GPUs**. Five formal jobs took 119.0–121.8 seconds of measured experiment time each (602.7 seconds summed), with 28.03 GiB maximum allocated memory per GPU. The fresh run window was **0.391 wall hours** on 2026-07-26. The exact fixed command was `bash reproduction/run.sh`.
 
 The limited prompt count gives wide intervals, the detector substitution prevents exact GenEval comparison, and offline oracle generation means measured wall time is diagnostic rather than an online PSP latency benchmark. A full reproduction still needs all 553 prompts, the original detector/HPS environments, and additional public backbones.
 

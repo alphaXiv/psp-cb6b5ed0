@@ -62,7 +62,7 @@ def _():
             "gpus_per_run": 4,
             "job_seconds_mean": 120.5359308,
             "peak_memory_gib": 28.0330615,
-            "attempt_wall_hours": 0.41,
+            "attempt_wall_hours": 0.390545,
         },
     }
     return (evidence,)
