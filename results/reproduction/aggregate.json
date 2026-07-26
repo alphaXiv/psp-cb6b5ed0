@@ -1,0 +1,100 @@
+{
+  "paper_id": "2607.21591",
+  "attempt_cutoff_utc": "2026-07-26T20:40:10.852Z",
+  "scope": {
+    "model": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    "sampler": "DDIM, 64 steps, eta=0",
+    "benchmark": "48-prompt stratified GenEval subset",
+    "prompt_categories": ["single_object", "two_object", "counting", "colors", "position", "color_attr"],
+    "replicates": 5,
+    "prompt_seed_pairs": 240,
+    "selection_forward_passes": {
+      "standard": 64,
+      "best_of_4": 256,
+      "psp_default_8_to_4_to_2": 256,
+      "psp_timing_8_to_4_to_2": 256,
+      "oracle_8_diagnostic": 512
+    }
+  },
+  "paper_sd15": {
+    "standard": {"image_reward": -0.159, "hps": 0.257, "geneval": 0.434},
+    "best_of_4": {"image_reward": 0.655, "hps": 0.273, "geneval": 0.542},
+    "psp_default": {"image_reward": 0.827, "hps": 0.278, "geneval": 0.574},
+    "psp_minus_best_of_4": {"image_reward": 0.172, "hps": 0.005, "geneval": 0.032}
+  },
+  "observed": {
+    "standard": {
+      "image_reward": -0.0651848312,
+      "clip_alignment": 0.3177754720,
+      "geneval": 0.2500000000
+    },
+    "best_of_4": {
+      "image_reward": 0.7759737460,
+      "clip_alignment": 0.3298629761,
+      "geneval": 0.3666666667
+    },
+    "psp_default": {
+      "image_reward": 0.9359526203,
+      "clip_alignment": 0.3318613688,
+      "geneval": 0.3625000000
+    },
+    "psp_timing": {
+      "image_reward": 0.8323751913,
+      "clip_alignment": 0.3301300049,
+      "geneval": 0.3375000000
+    },
+    "oracle_8": {
+      "image_reward": 1.0118617079,
+      "clip_alignment": 0.3319417318,
+      "geneval": 0.3666666667
+    }
+  },
+  "psp_minus_best_of_4": {
+    "image_reward": {
+      "mean": 0.1599788743,
+      "repeat_level_t95": [0.0579667318, 0.2619910168],
+      "by_replicate": [0.1715834957, 0.2457090698, 0.1821980332, 0.0231470743, 0.1772566984]
+    },
+    "clip_alignment": {
+      "mean": 0.0019983927,
+      "repeat_level_t95": [-0.0014131937, 0.0054099791],
+      "by_replicate": [-0.0018615723, 0.0031687419, 0.0056050618, 0.0010401408, 0.0020395915]
+    },
+    "geneval": {
+      "mean": -0.0041666667,
+      "repeat_level_t95": [-0.0782413456, 0.0699080123],
+      "by_replicate": [0.0, 0.0, 0.0833333333, -0.0208333333, -0.0833333333]
+    }
+  },
+  "mechanism": {
+    "intermediate_final_image_reward_spearman": {
+      "8": 0.3231524988,
+      "16": 0.6589722472,
+      "24": 0.8281854402,
+      "32": 0.8983030087,
+      "40": 0.9496476419,
+      "48": 0.9767110335,
+      "56": 0.9903136842
+    },
+    "default_oracle_regret_image_reward": 0.0759090877,
+    "timing_oracle_regret_image_reward": 0.1794865167,
+    "default_oracle_survival_after_second_prune": 0.7875,
+    "timing_oracle_survival_after_first_prune": 0.6541666667,
+    "default_minus_timing": {
+      "image_reward": 0.1035774290,
+      "clip_alignment": 0.0017313639,
+      "geneval": 0.0250000000
+    }
+  },
+  "compute": {
+    "backend": "kubernetes",
+    "gpu_model": "NVIDIA RTX PRO 6000 Blackwell",
+    "gpus_per_run": 4,
+    "peak_concurrent_gpu_count": 16,
+    "formal_job_elapsed_seconds_mean": 120.5359308,
+    "formal_job_elapsed_seconds_range": [118.9726202, 121.8218155],
+    "formal_job_elapsed_seconds_sum": 602.6796539,
+    "peak_memory_allocated_gib": 28.0330615,
+    "attempt_wall_hours_to_last_evidence": 0.41
+  }
+}

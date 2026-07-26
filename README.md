@@ -1,3 +1,33 @@
+# Fresh SD1.5 reproduction: Progressive Seed Pruning
+
+[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/alphaXiv/psp-cb6b5ed0/blob/main/notebooks/psp_reproduction.py)
+[![Reproduction verdict](https://img.shields.io/badge/verdict-partially%20reproduced-f59e0b)](reports/psp-sd15/report.md)
+
+This fresh, post-2026-07-26 reproduction tests the paper’s central SD1.5 claim: at a fixed generator budget, can the released 8→4→2 Progressive Seed Pruning (PSP) schedule beat fully denoising four seeds and choosing the best? Across five seed windows on a 48-prompt stratified GenEval subset, PSP and Best-of-4 each used exactly 256 denoising forward passes per prompt.
+
+**Assessment: partially reproduced.** The paper reports an ImageReward improvement of **+0.172** (0.655→0.827); we observed **+0.160** (0.776→0.936; repeat-level 95% interval +0.058 to +0.262). The same selection did not clearly improve independent CLIP (**+0.0020**, interval crossing zero) or bounded GenEval correctness (**−0.004**, wide interval), so the evidence supports reward-guided selection but not broad alignment transfer.
+
+The timing mechanism did reproduce cleanly. Moving the first prune from step 16 to step 8—where intermediate/final reward rank correlation is only 0.323—raised oracle regret from 0.076 to 0.179 and lowered eventual-best-seed survival from 85.4% to 65.4%.
+
+Read the [tutorial-style illustrated report](reports/psp-sd15/report.md), explore the [self-contained marimo notebook](notebooks/psp_reproduction.py), or inspect the [aggregated measurements](results/reproduction/aggregate.json). Open the notebook directly at the exact public [Molab URL](https://molab.marimo.io/github/alphaXiv/psp-cb6b5ed0/blob/main/notebooks/psp_reproduction.py).
+
+Scope and substitutions: 48 of 553 GenEval prompts, evenly split across six prompt types; five non-overlapping seed windows; public SD1.5; deterministic 64-step DDIM; fixed ImageReward; Transformers Mask2Former with GenEval’s decision rules instead of the mmcv 1.x detector environment; CLIP ViT-B/32 instead of unavailable HPSv2. SDXL and gated SD3.5 were not tested.
+
+All fresh evidence ran on **OpenResearch Kubernetes** with **NVIDIA RTX PRO 6000 Blackwell** GPUs. Each formal run used four GPUs; peak concurrency was **16 GPUs**. Formal measured experiment time was 119.0–121.8 seconds per run (602.7 seconds summed), peak allocated memory was 28.03 GiB per GPU, and the fresh setup-to-last-evidence window was **0.41 wall hours**.
+
+## Experiment log
+
+| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
+|---|---|---|---|---|
+| `main` | Public report, notebook, figures, and runnable harness | Not run as an experiment (publication surface) | Published synthesis of fresh branch evidence | N/A |
+| [Lock-safe evaluator, seed 0](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-clip-and-geneval-evaluation-scout) | Public Transformers CLIP/Mask2Former evaluator; seed window 0 | `bash reproduction/run.sh` | PSP−Best-of-4 ImageReward +0.172; GenEval +0.000 | Kubernetes, 4× RTX PRO 6000 Blackwell, 121.82 s |
+| [Seed window 1](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-1) | Repeat with disjoint initial seeds | `bash reproduction/run.sh` | ImageReward +0.246; GenEval +0.000 | Kubernetes, 4× RTX PRO 6000 Blackwell, 120.51 s |
+| [Seed window 2](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-2) | Repeat with disjoint initial seeds | `bash reproduction/run.sh` | ImageReward +0.182; GenEval +0.083 | Kubernetes, 4× RTX PRO 6000 Blackwell, 121.64 s |
+| [Seed window 3](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-3-2) | Repeat with disjoint initial seeds | `bash reproduction/run.sh` | ImageReward +0.023; GenEval −0.021 | Kubernetes, 4× RTX PRO 6000 Blackwell, 118.97 s |
+| [Seed window 4](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-4-2) | Repeat with disjoint initial seeds | `bash reproduction/run.sh` | ImageReward +0.177; GenEval −0.083 | Kubernetes, 4× RTX PRO 6000 Blackwell, 119.74 s |
+
+---
+
 # PSP: Inference-Time Scaling of Diffusion Models via Progressive Seed Pruning
 
 [![Paper](https://img.shields.io/badge/arXiv-2607.21591-b31b1b.svg)](https://arxiv.org/abs/2607.21591)

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-label="Early timing ablation has higher oracle regret and lower oracle survival than the default schedule">
+  <rect width="960" height="500" fill="#fbfcfe"/>
+  <style>text{font-family:Inter,Arial,sans-serif;fill:#182230}.title{font-size:24px;font-weight:700}.sub{font-size:15px;fill:#52606d}.axis{stroke:#9aa5b1}.grid{stroke:#d9e2ec}.label{font-size:15px}.value{font-size:17px;font-weight:700}.note{font-size:16px;font-weight:700}</style>
+  <text x="38" y="42" class="title">Pruning before scores are predictive discards better seeds</text>
+  <text x="38" y="68" class="sub">Default: prune at steps 16 and 32. Timing ablation: prune at steps 8 and 48. Both cost 256 generator forwards.</text>
+  <text x="90" y="115" class="note">Oracle ImageReward regret ↓</text>
+  <line x1="90" y1="390" x2="430" y2="390" class="axis"/><line x1="90" y1="145" x2="90" y2="390" class="axis"/>
+  <line x1="90" y1="390" x2="430" y2="390" class="grid"/><line x1="90" y1="186" x2="430" y2="186" class="grid"/>
+  <text x="55" y="395" class="sub">0.00</text><text x="55" y="191" class="sub">0.20</text>
+  <rect x="145" y="313" width="90" height="77" rx="5" fill="#0f9d8a"/><rect x="290" y="207" width="90" height="183" rx="5" fill="#d97706"/>
+  <text x="190" y="303" text-anchor="middle" class="value">0.076</text><text x="335" y="197" text-anchor="middle" class="value">0.179</text>
+  <text x="190" y="417" text-anchor="middle" class="label">Default</text><text x="335" y="417" text-anchor="middle" class="label">Timing ablation</text>
+  <text x="235" y="462" text-anchor="middle" class="sub">2.36× more regret</text>
+
+  <text x="545" y="115" class="note">Eventual-best seed survives first prune ↑</text>
+  <line x1="545" y1="390" x2="900" y2="390" class="axis"/><line x1="545" y1="145" x2="545" y2="390" class="axis"/>
+  <line x1="545" y1="390" x2="900" y2="390" class="grid"/><line x1="545" y1="145" x2="900" y2="145" class="grid"/>
+  <text x="510" y="395" class="sub">0%</text><text x="503" y="150" class="sub">100%</text>
+  <rect x="605" y="181" width="90" height="209" rx="5" fill="#0f9d8a"/><rect x="755" y="230" width="90" height="160" rx="5" fill="#d97706"/>
+  <text x="650" y="171" text-anchor="middle" class="value">85.4%</text><text x="800" y="220" text-anchor="middle" class="value">65.4%</text>
+  <text x="650" y="417" text-anchor="middle" class="label">Step 16</text><text x="800" y="417" text-anchor="middle" class="label">Step 8</text>
+  <text x="725" y="462" text-anchor="middle" class="sub">−20 percentage points</text>
+</svg>

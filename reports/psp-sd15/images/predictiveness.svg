@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-label="Correlation between intermediate and final ImageReward rises through denoising">
+  <rect width="960" height="500" fill="#fbfcfe"/>
+  <style>text{font-family:Inter,Arial,sans-serif;fill:#182230}.title{font-size:24px;font-weight:700}.sub{font-size:15px;fill:#52606d}.axis{stroke:#9aa5b1}.grid{stroke:#d9e2ec}.tick{font-size:14px}.note{font-size:16px;font-weight:700}</style>
+  <text x="38" y="42" class="title">Intermediate scores become reliable quickly—but not immediately</text>
+  <text x="38" y="68" class="sub">Spearman rank correlation with final ImageReward, averaged over five seed windows (1,920 candidates per checkpoint)</text>
+  <line x1="90" y1="405" x2="900" y2="405" class="axis"/><line x1="90" y1="112" x2="90" y2="405" class="axis"/>
+  <line x1="90" y1="405" x2="900" y2="405" class="grid"/><text x="50" y="410" class="tick">0.0</text>
+  <line x1="90" y1="288" x2="900" y2="288" class="grid"/><text x="50" y="293" class="tick">0.4</text>
+  <line x1="90" y1="171" x2="900" y2="171" class="grid"/><text x="50" y="176" class="tick">0.8</text>
+  <line x1="90" y1="112" x2="900" y2="112" class="grid"/><text x="50" y="117" class="tick">1.0</text>
+  <rect x="185" y="112" width="5" height="293" fill="#0f9d8a" opacity=".18"/><rect x="455" y="112" width="5" height="293" fill="#0f9d8a" opacity=".18"/>
+  <polyline points="95,310 230,212 365,162 500,142 635,127 770,119 900,115" fill="none" stroke="#0f9d8a" stroke-width="5"/>
+  <g fill="#0f9d8a" stroke="#087f6d" stroke-width="2"><circle cx="95" cy="310" r="7"/><circle cx="230" cy="212" r="7"/><circle cx="365" cy="162" r="7"/><circle cx="500" cy="142" r="7"/><circle cx="635" cy="127" r="7"/><circle cx="770" cy="119" r="7"/><circle cx="900" cy="115" r="7"/></g>
+  <g class="tick" text-anchor="middle"><text x="95" y="430">8</text><text x="230" y="430">16</text><text x="365" y="430">24</text><text x="500" y="430">32</text><text x="635" y="430">40</text><text x="770" y="430">48</text><text x="900" y="430">56</text></g>
+  <text x="480" y="468" text-anchor="middle" class="sub">Denoising step (of 64)</text>
+  <text x="125" y="292" class="note">0.323</text><text x="242" y="202" class="note">0.659</text><text x="510" y="134" class="note">0.898</text><text x="825" y="103" class="note">0.990</text>
+  <text x="190" y="95" text-anchor="middle" class="sub">default first prune</text><text x="458" y="95" text-anchor="middle" class="sub">default second prune</text>
+</svg>

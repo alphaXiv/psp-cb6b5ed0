@@ -20,7 +20,9 @@ from scipy.stats import pearsonr, spearmanr
 
 ROOT = Path(__file__).resolve().parents[1]
 T2I = ROOT / "Fk-Diffusion-Steering" / "text_to_image"
-sys.path.insert(0, str(T2I))
+FKD_DIR = T2I / "fkd_diffusers"
+for module_path in (T2I, FKD_DIR):
+    sys.path.insert(0, str(module_path))
 
 # hpsv2's open_clip release imports turtle, which otherwise tries to import Tk.
 if "turtle" not in sys.modules:
@@ -152,21 +154,25 @@ def replay_schedule(scores: dict[int, list[float]], schedule: list[list[int]], f
 
 
 def clip_alignment(images, prompts, device):
-    import open_clip
+    from transformers import AutoProcessor, CLIPModel
 
-    model, _, preprocess = open_clip.create_model_and_transforms(
-        "ViT-B-32", pretrained="openai", device=device
-    )
-    tokenizer = open_clip.get_tokenizer("ViT-B-32")
-    batch = torch.stack([preprocess(image) for image in images]).to(device)
-    tokens = tokenizer(prompts).to(device)
+    processor = AutoProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    model = CLIPModel.from_pretrained(
+        "openai/clip-vit-base-patch32", torch_dtype=torch.float16
+    ).to(device).eval()
+    inputs = processor(text=prompts, images=images, return_tensors="pt", padding=True)
+    inputs = {
+        key: value.to(device, dtype=torch.float16 if value.is_floating_point() else None)
+        for key, value in inputs.items()
+    }
     with torch.inference_mode():
-        image_features = model.encode_image(batch)
-        text_features = model.encode_text(tokens)
+        outputs = model(**inputs)
+        image_features = outputs.image_embeds
+        text_features = outputs.text_embeds
         image_features = image_features / image_features.norm(dim=-1, keepdim=True)
         text_features = text_features / text_features.norm(dim=-1, keepdim=True)
     result = (image_features * text_features).sum(-1).float().cpu().tolist()
-    del model, batch, tokens, image_features, text_features
+    del model, inputs, outputs, image_features, text_features
     torch.cuda.empty_cache()
     return [float(x) for x in result]
 
@@ -268,6 +274,23 @@ def per_rank(config: dict, rank: int, world: int) -> dict:
             flush=True,
         )
 
+    generation_rows = [
+        {key: value for key, value in row.items() if not key.startswith("_")}
+        for row in rows
+    ]
+    print(
+        f"GENERATION_RESULT_RANK_{rank}="
+        + json.dumps(
+            {
+                "rank": rank,
+                "replicate": int(config["replicate"]),
+                "generation_s": generation_s,
+                "rows": generation_rows,
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
     independent_metric = score_independent(rows, device)
     evaluator = ModernGenEval(device)
     for idx, row in enumerate(rows):
