@@ -36,8 +36,12 @@ class DetectedObject:
 
 class ModernGenEval:
     def __init__(self, device: str):
-        import open_clip
-        from transformers import AutoImageProcessor, Mask2FormerForUniversalSegmentation
+        from transformers import (
+            AutoImageProcessor,
+            AutoProcessor,
+            CLIPModel,
+            Mask2FormerForUniversalSegmentation,
+        )
 
         self.device = device
         self.processor = AutoImageProcessor.from_pretrained(
@@ -51,11 +55,10 @@ class ModernGenEval:
             int(k): NAME_ALIASES.get(v.lower(), v.lower())
             for k, v in self.detector.config.id2label.items()
         }
-        self.clip_model, _, self.clip_preprocess = open_clip.create_model_and_transforms(
-            "ViT-B-32", pretrained="openai", device=device
-        )
-        self.clip_model.eval()
-        self.clip_tokenizer = open_clip.get_tokenizer("ViT-B-32")
+        self.clip_processor = AutoProcessor.from_pretrained("openai/clip-vit-base-patch32")
+        self.clip_model = CLIPModel.from_pretrained(
+            "openai/clip-vit-base-patch32", torch_dtype=torch.float16
+        ).to(device).eval()
         self.color_cache: dict[str, torch.Tensor] = {}
 
     def detect(self, image) -> dict[str, list[DetectedObject]]:
@@ -118,7 +121,6 @@ class ModernGenEval:
         blank = Image.new("RGB", image.size, color="#999")
         masked = Image.composite(image.convert("RGB"), blank, Image.fromarray(obj.mask))
         crop = masked.crop((x1, y1, max(x1 + 1, x2 + 1), max(y1 + 1, y2 + 1)))
-        image_tensor = self.clip_preprocess(crop).unsqueeze(0).to(self.device)
         if classname not in self.color_cache:
             texts = [
                 template.format(color=color, classname=classname)
@@ -129,13 +131,23 @@ class ModernGenEval:
                     "a photo of a {color} object",
                 )
             ]
-            tokens = self.clip_tokenizer(texts).to(self.device)
+            text_inputs = self.clip_processor(
+                text=texts, padding=True, return_tensors="pt"
+            )
+            text_inputs = {key: value.to(self.device) for key, value in text_inputs.items()}
             with torch.inference_mode():
-                features = self.clip_model.encode_text(tokens)
+                features = self.clip_model.get_text_features(**text_inputs)
                 features = features / features.norm(dim=-1, keepdim=True)
             self.color_cache[classname] = features.reshape(len(COLORS), 3, -1).mean(1)
+        image_inputs = self.clip_processor(images=crop, return_tensors="pt")
+        image_inputs = {
+            key: value.to(
+                self.device, dtype=torch.float16 if value.is_floating_point() else None
+            )
+            for key, value in image_inputs.items()
+        }
         with torch.inference_mode():
-            feature = self.clip_model.encode_image(image_tensor)
+            feature = self.clip_model.get_image_features(**image_inputs)
             feature = feature / feature.norm(dim=-1, keepdim=True)
         return COLORS[int((feature @ self.color_cache[classname].T).argmax().item())]
 
