@@ -20,7 +20,9 @@ from scipy.stats import pearsonr, spearmanr
 
 ROOT = Path(__file__).resolve().parents[1]
 T2I = ROOT / "Fk-Diffusion-Steering" / "text_to_image"
-sys.path.insert(0, str(T2I))
+FKD_DIR = T2I / "fkd_diffusers"
+for module_path in (T2I, FKD_DIR):
+    sys.path.insert(0, str(module_path))
 
 # hpsv2's open_clip release imports turtle, which otherwise tries to import Tk.
 if "turtle" not in sys.modules:
