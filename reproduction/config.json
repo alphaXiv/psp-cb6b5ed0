@@ -1,0 +1,10 @@
+{
+  "replicate": 0,
+  "prompts_per_tag": 8,
+  "num_steps": 64,
+  "pool_size": 8,
+  "model_id": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+  "checkpoints": [8, 16, 24, 32, 40, 48, 56],
+  "default_schedule": [[16, 4], [32, 2]],
+  "timing_schedule": [[8, 4], [48, 2]]
+}
