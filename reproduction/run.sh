@@ -8,6 +8,7 @@ python -m pip install --no-cache-dir \
   "huggingface-hub>=0.27,<1" \
   "image-reward @ git+https://github.com/THUDM/ImageReward.git@2ca71bac4ed86b922fe53ddaec3109fe94d45fd3" \
   "hpsv2==1.2.0" \
+  "google-genai>=1,<2" \
   "open-clip-torch==2.26.1" \
   "scipy>=1.11,<2" \
   "pandas>=2.1,<3" \
