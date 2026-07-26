@@ -6,7 +6,7 @@ python -m pip install --no-cache-dir \
   "diffusers @ git+https://github.com/huggingface/diffusers@af28ae2d5ba0ef80d99fff7859ebea730e1cf3f8" \
   "transformers==4.46.3" \
   "huggingface-hub>=0.27,<1" \
-  "ImageReward @ git+https://github.com/THUDM/ImageReward.git@2ca71bac4ed86b922fe53ddaec3109fe94d45fd3" \
+  "image-reward @ git+https://github.com/THUDM/ImageReward.git@2ca71bac4ed86b922fe53ddaec3109fe94d45fd3" \
   "hpsv2==1.2.0" \
   "open-clip-torch==2.26.1" \
   "scipy>=1.11,<2" \
