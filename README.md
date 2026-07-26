@@ -1,3 +1,30 @@
+# Independent reproduction: progressive seed pruning on SD1.5
+
+We tested the central matched-compute claim from [Inference-Time Scaling of Diffusion Models via Progressive Seed Pruning](https://arxiv.org/abs/2607.21591): score eight Stable Diffusion 1.5 seeds early, prune them 8→4→2, and compare the final result with Best-of-N=4 at the same 256 denoising-forward-pass selection budget.
+
+**Assessment: partially reproduced.** On five fresh seed windows covering 240 paired generations from a stratified 48-prompt GenEval subset, PSP improved ImageReward by **+0.160** (paper: **+0.172**) but changed GenEval correctness by **−0.004** (paper: **+0.032**). The ImageReward interval excluded zero; the GenEval and independent CLIP intervals did not. An equal-budget early/late timing schedule more than doubled oracle regret, supporting the paper’s mechanism claim.
+
+This is deliberately bounded: 48 of 553 GenEval prompts, five seed windows, SD1.5 only, CLIP cosine substituted for unavailable HPSv2, and GenEval’s original mmcv detector stack was replaced by the same decision rules over a public Transformers Mask2Former detector. Runs used Kubernetes on NVIDIA RTX PRO 6000 Blackwell GPUs, with 16 GPUs at peak concurrency and 0.391 hours of elapsed wall time for the fresh attempt.
+
+[Read the illustrated report](reports/psp-sd15/report.md) · [Open the self-contained notebook](notebooks/psp_reproduction.py)
+
+[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/alphaXiv/psp-cb6b5ed0/blob/main/notebooks/psp_reproduction.py)
+
+## Experiment log
+
+| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
+|---|---|---|---|---|
+| `main` | Public report, notebook, figures, and runnable harness | Not run as an experiment (publication surface) | Presentation only | — |
+| [Lock-safe seed window 0](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-clip-and-geneval-evaluation-scout) | Paired seed pool, default and timing schedules | `bash reproduction/run.sh` | Complete; +0.172 ImageReward, +0.000 GenEval | Kubernetes, 4× RTX PRO 6000 Blackwell |
+| [Final paired seed window 1](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/final-paired-evidence-seed-window-1) | Independent seed window | `bash reproduction/run.sh` | Complete; +0.246 ImageReward, +0.000 GenEval | Kubernetes, 4× RTX PRO 6000 Blackwell |
+| [Final evidence seed window 2](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/final-evidence-psp-seed-window-2) | Independent seed window | `bash reproduction/run.sh` | Complete; +0.182 ImageReward, +0.083 GenEval | Kubernetes, 4× RTX PRO 6000 Blackwell |
+| [Lock-safe seed window 3](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-3) | Independent seed window and negative-variance check | `bash reproduction/run.sh` | Complete; +0.023 ImageReward, −0.021 GenEval | Kubernetes, 4× RTX PRO 6000 Blackwell |
+| [Lock-safe seed window 4](https://github.com/alphaXiv/psp-cb6b5ed0/tree/orx/lock-safe-final-evidence-seed-window-4) | Fifth independent seed window | `bash reproduction/run.sh` | Complete; +0.177 ImageReward, −0.083 GenEval | Kubernetes, 4× RTX PRO 6000 Blackwell |
+
+The exact aggregate, confidence intervals, detector substitution, and run identifiers are preserved in [`results/reproduction_summary.json`](results/reproduction_summary.json). Early recovery branches that stopped before evaluation are omitted from the table; their logs identify dependency and concurrent-cache failures, not measurements.
+
+---
+
 # PSP: Inference-Time Scaling of Diffusion Models via Progressive Seed Pruning
 
 [![Paper](https://img.shields.io/badge/arXiv-2607.21591-b31b1b.svg)](https://arxiv.org/abs/2607.21591)

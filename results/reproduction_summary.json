@@ -1,0 +1,77 @@
+{
+  "paper_id": "2607.21591",
+  "attempt_cutoff_utc": "2026-07-26T20:40:10.852Z",
+  "verdict": "partially-reproduced",
+  "scope": {
+    "model": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    "benchmark": "GenEval stratified bounded subset",
+    "prompts_per_replicate": 48,
+    "replicates": 5,
+    "paired_prompt_seed_pools": 240,
+    "selection_forward_passes": {
+      "standard": 64,
+      "best_of_4": 256,
+      "psp_default_8_to_4_to_2": 256,
+      "psp_timing_8_to_4_to_2": 256,
+      "oracle_8_diagnostic": 512
+    }
+  },
+  "paper": {
+    "best_of_4": {"image_reward": 0.655, "hps": 0.273, "geneval": 0.542},
+    "psp": {"image_reward": 0.827, "hps": 0.278, "geneval": 0.574},
+    "psp_minus_best_of_4": {"image_reward": 0.172, "hps": 0.005, "geneval": 0.032}
+  },
+  "observed": {
+    "standard": {"image_reward": -0.065185, "clip_cosine": 0.317759, "geneval": 0.25},
+    "best_of_4": {"image_reward": 0.775974, "clip_cosine": 0.329839, "geneval": 0.366667},
+    "psp_default": {"image_reward": 0.935953, "clip_cosine": 0.331840, "geneval": 0.3625},
+    "psp_timing": {"image_reward": 0.832375, "clip_cosine": 0.330110, "geneval": 0.3375},
+    "oracle_8": {"image_reward": 1.011862, "clip_cosine": 0.331922, "geneval": 0.366667}
+  },
+  "paired_psp_minus_best_of_4": {
+    "image_reward": 0.159979,
+    "image_reward_95pct_prompt_bootstrap": [0.091861, 0.232287],
+    "geneval": -0.004167,
+    "geneval_95pct_prompt_bootstrap": [-0.041667, 0.033333],
+    "clip_cosine": 0.002001,
+    "clip_cosine_95pct_prompt_bootstrap": [-0.000261, 0.004368]
+  },
+  "mechanism": {
+    "intermediate_final_image_reward_spearman": {
+      "step_8": 0.323152,
+      "step_16": 0.658972,
+      "step_24": 0.828185,
+      "step_32": 0.898303,
+      "step_40": 0.949648,
+      "step_48": 0.976711,
+      "step_56": 0.990314
+    },
+    "default_mean_oracle_regret_image_reward": 0.075909,
+    "timing_mean_oracle_regret_image_reward": 0.179487,
+    "default_oracle_survival_step_16": 0.854167,
+    "default_oracle_survival_step_32": 0.7875,
+    "timing_oracle_survival_step_8": 0.654167,
+    "timing_oracle_survival_step_48": 0.65
+  },
+  "compute": {
+    "backend": "kubernetes",
+    "gpu_model": "NVIDIA RTX PRO 6000 Blackwell",
+    "maximum_concurrent_allocated_gpus": 16,
+    "gpus_per_run": 4,
+    "mean_terminal_job_elapsed_seconds": 120.719441,
+    "maximum_peak_memory_allocated_gib_per_gpu": 28.033062,
+    "maximum_peak_memory_reserved_gib_per_gpu": 29.8125,
+    "attempt_elapsed_wall_hours": 0.390545
+  },
+  "metric_substitutions": {
+    "hpsv2": "CLIP-ViT-B-32 cosine because HPSv2 assets were unavailable",
+    "geneval_detector": "GenEval decision rules with facebook/mask2former-swin-small-coco-instance via Transformers; mmcv 1.x replaced for Blackwell compatibility"
+  },
+  "evidence_run_ids": [
+    "3b6f5f67-edd3-422a-b2aa-879c6762ec35",
+    "4582e3dc-5b17-4334-bf06-6c191e1006ae",
+    "1cacce0c-0323-4124-93fd-615fd7a6c5c8",
+    "0fa5ed77-82cd-470f-9463-6e44ccade737",
+    "98871d73-3e33-4868-a3b9-e0a1eb5c2eb0"
+  ]
+}

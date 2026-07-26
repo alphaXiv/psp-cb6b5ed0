@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Timing ablation increases pruning regret</title>
+  <desc id="desc">Default pruning had ImageReward regret 0.076 and retained the oracle 79 percent after its second prune. Early-late timing had regret 0.179 and retained the oracle 65 percent.</desc>
+  <rect width="900" height="430" fill="#fbfaf7"/>
+  <text x="450" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="23" font-weight="700" fill="#17202a">Pruning too early discards more eventual winners</text>
+  <text x="235" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="650" fill="#17202a">Mean oracle regret (lower is better)</text>
+  <text x="680" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="650" fill="#17202a">Oracle seed retained after second prune</text>
+  <line x1="85" y1="340" x2="395" y2="340" stroke="#80909d" stroke-width="2"/>
+  <line x1="525" y1="340" x2="835" y2="340" stroke="#80909d" stroke-width="2"/>
+  <rect x="125" y="257" width="92" height="83" rx="5" fill="#2b7a78"/>
+  <rect x="265" y="143" width="92" height="197" rx="5" fill="#d35400"/>
+  <text x="171" y="247" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#17202a">0.076</text>
+  <text x="311" y="133" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#17202a">0.179</text>
+  <rect x="565" y="151" width="92" height="189" rx="5" fill="#2b7a78"/>
+  <rect x="705" y="184" width="92" height="156" rx="5" fill="#d35400"/>
+  <text x="611" y="141" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#17202a">78.8%</text>
+  <text x="751" y="174" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#17202a">65.0%</text>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#4b5963">
+    <text x="171" y="367" text-anchor="middle">Default</text><text x="171" y="387" text-anchor="middle">steps 16, 32</text>
+    <text x="311" y="367" text-anchor="middle">Timing ablation</text><text x="311" y="387" text-anchor="middle">steps 8, 48</text>
+    <text x="611" y="367" text-anchor="middle">Default</text><text x="611" y="387" text-anchor="middle">step 32</text>
+    <text x="751" y="367" text-anchor="middle">Timing ablation</text><text x="751" y="387" text-anchor="middle">step 48</text>
+  </g>
+</svg>

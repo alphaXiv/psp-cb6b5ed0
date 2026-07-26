@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Intermediate estimates become predictive late in denoising</title>
+  <desc id="desc">Spearman correlation with final ImageReward rises from 0.323 at step 8 to 0.990 at step 56.</desc>
+  <rect width="900" height="430" fill="#fbfaf7"/>
+  <text x="450" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="23" font-weight="700" fill="#17202a">Intermediate scores become reliable as denoising proceeds</text>
+  <text x="450" y="70" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#4b5963">Mean Spearman correlation with final ImageReward; five repeats</text>
+  <line x1="100" y1="350" x2="820" y2="350" stroke="#80909d" stroke-width="2"/>
+  <line x1="100" y1="95" x2="100" y2="350" stroke="#80909d" stroke-width="2"/>
+  <g stroke="#d9dedf" stroke-width="1">
+    <line x1="100" y1="299" x2="820" y2="299"/><line x1="100" y1="248" x2="820" y2="248"/>
+    <line x1="100" y1="197" x2="820" y2="197"/><line x1="100" y1="146" x2="820" y2="146"/><line x1="100" y1="95" x2="820" y2="95"/>
+  </g>
+  <g font-family="system-ui,sans-serif" font-size="13" fill="#4b5963">
+    <text x="88" y="354" text-anchor="end">0.0</text><text x="88" y="303" text-anchor="end">0.2</text>
+    <text x="88" y="252" text-anchor="end">0.4</text><text x="88" y="201" text-anchor="end">0.6</text>
+    <text x="88" y="150" text-anchor="end">0.8</text><text x="88" y="99" text-anchor="end">1.0</text>
+    <text x="100" y="375" text-anchor="middle">8</text><text x="220" y="375" text-anchor="middle">16</text>
+    <text x="340" y="375" text-anchor="middle">24</text><text x="460" y="375" text-anchor="middle">32</text>
+    <text x="580" y="375" text-anchor="middle">40</text><text x="700" y="375" text-anchor="middle">48</text>
+    <text x="820" y="375" text-anchor="middle">56</text><text x="460" y="408" text-anchor="middle">Denoising step (of 64)</text>
+  </g>
+  <polyline points="100,268 220,182 340,139 460,121 580,108 700,101 820,97" fill="none" stroke="#2b7a78" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="#2b7a78" stroke="#fff" stroke-width="2">
+    <circle cx="100" cy="268" r="7"/><circle cx="220" cy="182" r="7"/><circle cx="340" cy="139" r="7"/>
+    <circle cx="460" cy="121" r="7"/><circle cx="580" cy="108" r="7"/><circle cx="700" cy="101" r="7"/><circle cx="820" cy="97" r="7"/>
+  </g>
+  <line x1="220" y1="90" x2="220" y2="350" stroke="#d35400" stroke-width="2" stroke-dasharray="7 6"/>
+  <line x1="460" y1="90" x2="460" y2="350" stroke="#d35400" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="228" y="329" font-family="system-ui,sans-serif" font-size="13" fill="#9c3e08">default prune</text>
+  <text x="468" y="329" font-family="system-ui,sans-serif" font-size="13" fill="#9c3e08">default prune</text>
+</svg>
