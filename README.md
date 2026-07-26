@@ -2,7 +2,7 @@
 
 We tested the central matched-compute claim from [Inference-Time Scaling of Diffusion Models via Progressive Seed Pruning](https://arxiv.org/abs/2607.21591): score eight Stable Diffusion 1.5 seeds early, prune them 8→4→2, and compare the final result with Best-of-N=4 at the same 256 denoising-forward-pass selection budget.
 
-**Assessment: partially reproduced.** On five fresh seed windows covering 240 paired generations from a stratified 48-prompt GenEval subset, PSP improved ImageReward by **+0.160** (paper: **+0.172**) but changed GenEval correctness by **−0.004** (paper: **+0.032**). The ImageReward interval excluded zero; the GenEval and independent CLIP intervals did not. An equal-budget early/late timing schedule more than doubled oracle regret, supporting the paper’s mechanism claim.
+**Assessment: partially reproduced.** On five fresh seed windows covering 240 paired prompt/seed pools from a stratified 48-prompt GenEval subset, PSP improved ImageReward by **+0.160** (paper: **+0.172**) but changed GenEval correctness by **−0.004** (paper: **+0.032**). The ImageReward interval excluded zero; the GenEval and independent CLIP intervals did not. An equal-budget early/late timing schedule more than doubled oracle regret, supporting the paper’s mechanism claim.
 
 This is deliberately bounded: 48 of 553 GenEval prompts, five seed windows, SD1.5 only, CLIP cosine substituted for unavailable HPSv2, and GenEval’s original mmcv detector stack was replaced by the same decision rules over a public Transformers Mask2Former detector. Runs used Kubernetes on NVIDIA RTX PRO 6000 Blackwell GPUs, with 16 GPUs at peak concurrency and 0.391 hours of elapsed wall time for the fresh attempt.
 
