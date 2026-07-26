@@ -1,5 +1,5 @@
 {
-  "replicate": 0,
+  "replicate": 4,
   "prompts_per_tag": 8,
   "num_steps": 64,
   "pool_size": 8,
