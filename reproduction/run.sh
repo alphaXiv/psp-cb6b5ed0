@@ -28,4 +28,10 @@ print("ENVIRONMENT_JSON=" + __import__("json").dumps({
 assert torch.cuda.is_available() and torch.cuda.device_count() == 4
 PY
 
+python - <<'PY'
+import open_clip
+open_clip.create_model_and_transforms("ViT-B-32", pretrained="openai", device="cpu")
+print("CLIP_CACHE_PREFETCH=verified")
+PY
+
 torchrun --standalone --nproc_per_node=4 reproduction/run_reproduction.py
