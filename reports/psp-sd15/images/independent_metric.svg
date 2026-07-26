@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" role="img" aria-labelledby="title desc">
+  <title id="title">Independent CLIP alignment change</title>
+  <desc id="desc">PSP minus Best-of-N CLIP cosine was 0.00200 with a 95 percent interval from minus 0.00026 to 0.00437.</desc>
+  <rect width="900" height="340" fill="#fbfaf7"/>
+  <text x="450" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="23" font-weight="700" fill="#17202a">Independent alignment check: CLIP cosine</text>
+  <text x="450" y="70" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#4b5963">Paired PSP − Best-of-N=4, 240 prompt/seed pools</text>
+  <line x1="120" y1="220" x2="800" y2="220" stroke="#80909d" stroke-width="2"/>
+  <line x1="256" y1="105" x2="256" y2="245" stroke="#b03a2e" stroke-width="2" stroke-dasharray="7 6"/>
+  <g font-family="system-ui,sans-serif" font-size="13" fill="#4b5963">
+    <text x="120" y="245" text-anchor="middle">−0.002</text><text x="256" y="245" text-anchor="middle">0</text>
+    <text x="528" y="245" text-anchor="middle">+0.004</text><text x="800" y="245" text-anchor="middle">+0.008</text>
+  </g>
+  <line x1="238" y1="155" x2="553" y2="155" stroke="#d35400" stroke-width="6"/>
+  <line x1="238" y1="143" x2="238" y2="167" stroke="#d35400" stroke-width="3"/>
+  <line x1="553" y1="143" x2="553" y2="167" stroke="#d35400" stroke-width="3"/>
+  <circle cx="392" cy="155" r="12" fill="#2b7a78" stroke="#ffffff" stroke-width="3"/>
+  <text x="392" y="122" text-anchor="middle" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#17202a">+0.00200</text>
+  <text x="450" y="298" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#4b5963">Directionally positive, but the 95% interval (−0.00026, +0.00437) includes zero.</text>
+</svg>
